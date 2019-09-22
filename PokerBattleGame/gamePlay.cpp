@@ -6,6 +6,7 @@
 using namespace std;
 
 void cardShuffle();
+void cardSetting();
 
 string card[40]
 { "¢¼1", "¢¼2", "¢¼3", "¢¼4", "¢¼5", "¢¼6", "¢¼7", "¢¼8", "¢¼9", "¢¼10",
@@ -14,10 +15,13 @@ string card[40]
 	"¢À1", "¢À2", "¢À3", "¢À4", "¢À5", "¢À6", "¢À7", "¢À8", "¢À9", "¢À10" };
 
 vector <int> cardNumber;
+vector <int> cardShowNumber;
+
 void gamePlay() {
 	srand((unsigned int)time(0));
 
 	cardShuffle();
+	cardSetting();
 }
 
 void cardShuffle() {
@@ -27,5 +31,13 @@ void cardShuffle() {
 			number = rand() % 40;
 		}
 		cardNumber.push_back(number);
+	}
+}
+
+void cardSetting() {
+	cardShowNumber.clear();
+	for (int cardSetCounter = 0; cardSetCounter < 7; cardSetCounter++) {
+		cardShowNumber.push_back(cardNumber[0]);
+		cardNumber.erase(cardNumber.begin());
 	}
 }
