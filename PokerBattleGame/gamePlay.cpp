@@ -7,6 +7,7 @@ using namespace std;
 
 void cardShuffle();
 void cardSetting();
+void cardShow();
 
 string card[40]
 { "¢¼1", "¢¼2", "¢¼3", "¢¼4", "¢¼5", "¢¼6", "¢¼7", "¢¼8", "¢¼9", "¢¼10",
@@ -22,6 +23,7 @@ void gamePlay() {
 
 	cardShuffle();
 	cardSetting();
+	cardShow();
 }
 
 void cardShuffle() {
@@ -40,4 +42,12 @@ void cardSetting() {
 		cardShowNumber.push_back(cardNumber[0]);
 		cardNumber.erase(cardNumber.begin());
 	}
+}
+
+void cardShow() {
+	cout << "----------------------------------------\n\n   ";
+	for (int cardShowCounter = 0; cardShowCounter < 7; cardShowCounter++) {
+		cout << card[cardNumber[cardShowCounter]] << "  ";
+	}
+	cout << "\n\n----------------------------------------\n";
 }
