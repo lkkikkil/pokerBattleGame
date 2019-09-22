@@ -8,6 +8,7 @@ using namespace std;
 void cardShuffle();
 void cardSetting();
 void cardShow();
+void cardChange();
 
 string card[40]
 { "♠1", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "♠10",
@@ -24,6 +25,7 @@ void gamePlay() {
 	cardShuffle();
 	cardSetting();
 	cardShow();
+	cardChange();
 }
 
 void cardShuffle() {
@@ -50,4 +52,23 @@ void cardShow() {
 		cout << card[cardShowNumber[cardShowCounter]] << "  ";
 	}
 	cout << "\n\n----------------------------------------\n";
+}
+
+void cardChange() {
+	int changeAmount;
+	cout << "몇번 바꾸시겠습니까? ";
+	cin >> changeAmount;
+
+	for (int cardChangeCounter = 1; cardChangeCounter <= changeAmount; cardChangeCounter++) {
+		int changeNumber;
+		cout << cardChangeCounter << "번째로 바꾸실 카드의 번호를 입력해주세요 : ";
+		cin >> changeNumber;
+
+		cardShowNumber[changeNumber - 1] = cardNumber[0];
+		cardNumber.erase(cardNumber.begin());
+
+		system("cls");
+		cardShow();
+		cout << card[cardShowNumber[changeNumber - 1]] << "로 바뀌었습니다.\n";
+	}
 }
