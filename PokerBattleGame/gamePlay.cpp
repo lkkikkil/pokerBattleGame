@@ -47,7 +47,7 @@ void cardSetting() {
 void cardShow() {
 	cout << "----------------------------------------\n\n   ";
 	for (int cardShowCounter = 0; cardShowCounter < 7; cardShowCounter++) {
-		cout << card[cardNumber[cardShowCounter]] << "  ";
+		cout << card[cardShowNumber[cardShowCounter]] << "  ";
 	}
 	cout << "\n\n----------------------------------------\n";
 }
