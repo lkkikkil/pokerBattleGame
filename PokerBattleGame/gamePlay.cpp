@@ -9,6 +9,7 @@ void cardShuffle();
 void cardSetting();
 void cardShow();
 void cardChange();
+void playerInformationShow();
 
 string card[40]
 { "♠1", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "♠10",
@@ -18,12 +19,17 @@ string card[40]
 
 vector <int> cardNumber;
 vector <int> cardShowNumber;
+int player1Hp{ 0 };
+int player2Hp{ 0 };
+int player1Dia{ 0 };
+int player2Dia{ 0 };
 
 void gamePlay() {
 	srand((unsigned int)time(0));
 
 	cardShuffle();
 	cardSetting();
+	playerInformationShow();
 	cardShow();
 	cardChange();
 }
@@ -71,4 +77,12 @@ void cardChange() {
 		cardShow();
 		cout << card[cardShowNumber[changeNumber - 1]] << "로 바뀌었습니다.\n";
 	}
+}
+
+void playerInformationShow() {
+	cout << "----------------------------------------\n\n    "
+		<< "player1         |     player2\n    "
+		<< setfill(' ') << "체력 : " << setw(3) << player1Hp << "      |     체력 : " << setw(3) << player2Hp << "\n    "
+		<< setfill(' ') << "다이아 : " << setw(2) << player1Dia << "     |     다이아 : " << setw(2) << player2Dia
+		<< "\n\n----------------------------------------\n";
 }
