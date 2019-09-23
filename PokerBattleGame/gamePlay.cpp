@@ -10,6 +10,7 @@ void cardSetting();
 void cardShow();
 void cardChange();
 void playerInformationShow();
+void gameSet();
 
 string card[40]
 { "¢¼1", "¢¼2", "¢¼3", "¢¼4", "¢¼5", "¢¼6", "¢¼7", "¢¼8", "¢¼9", "¢¼10",
@@ -27,11 +28,15 @@ int player2Dia{ 0 };
 void gamePlay() {
 	srand((unsigned int)time(0));
 
-	cardShuffle();
-	cardSetting();
+	gameSet();
 	playerInformationShow();
 	cardShow();
 	cardChange();
+}
+
+void gameSet() {
+	cardShuffle();
+	cardSetting();
 }
 
 void cardShuffle() {
