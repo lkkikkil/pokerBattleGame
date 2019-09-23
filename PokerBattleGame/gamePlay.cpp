@@ -79,6 +79,7 @@ void cardChange() {
 		cardNumber.erase(cardNumber.begin());
 
 		system("cls");
+		playerInformationShow();
 		cardShow();
 		cout << card[cardShowNumber[changeNumber - 1]] << "로 바뀌었습니다.\n";
 	}
