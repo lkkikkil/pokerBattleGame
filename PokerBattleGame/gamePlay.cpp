@@ -31,10 +31,10 @@ void gamePlay() {
 	srand((unsigned int)time(0));
 
 	gameSet();
-	playerInformationShow();
-	cardShow();
-	cardChange();
-	playerChange();
+	while (true) {
+		cardChange();
+		playerChange();
+	}
 }
 
 void gameSet() {
@@ -45,6 +45,9 @@ void gameSet() {
 	player2Hp = 110;
 	player2Dia = 15;
 	playerNumber = 1;
+
+	playerInformationShow();
+	cardShow();
 }
 
 void cardShuffle() {
