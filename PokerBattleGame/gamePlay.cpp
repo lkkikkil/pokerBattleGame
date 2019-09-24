@@ -24,6 +24,7 @@ int player1Hp{ 0 };
 int player2Hp{ 0 };
 int player1Dia{ 0 };
 int player2Dia{ 0 };
+int playerNumber{ 0 };
 
 void gamePlay() {
 	srand((unsigned int)time(0));
@@ -37,6 +38,11 @@ void gamePlay() {
 void gameSet() {
 	cardShuffle();
 	cardSetting();
+	player1Hp = 100;
+	player1Dia = 10;
+	player2Hp = 110;
+	player2Dia = 15;
+	playerNumber = 1;
 }
 
 void cardShuffle() {
