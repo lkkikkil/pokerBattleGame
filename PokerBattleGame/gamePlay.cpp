@@ -11,6 +11,7 @@ void cardShow();
 void cardChange();
 void playerInformationShow();
 void gameSet();
+void playerChange();
 
 string card[40]
 { "♠1", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "♠10",
@@ -33,6 +34,7 @@ void gamePlay() {
 	playerInformationShow();
 	cardShow();
 	cardChange();
+	playerChange();
 }
 
 void gameSet() {
@@ -97,4 +99,13 @@ void playerInformationShow() {
 		<< setfill(' ') << "체력 : " << setw(3) << player1Hp << "      |     체력 : " << setw(3) << player2Hp << "\n    "
 		<< setfill(' ') << "다이아 : " << setw(2) << player1Dia << "     |     다이아 : " << setw(2) << player2Dia
 		<< "\n\n----------------------------------------\n";
+}
+
+void playerChange() {
+	if (playerNumber == 1) {
+		playerNumber = 2;
+	}
+	else {
+		playerNumber = 1;
+	}
 }
