@@ -12,6 +12,7 @@ void cardChange();
 void playerInformationShow();
 void gameSet();
 void playerChange();
+void turnShow();
 
 string card[40]
 { "♠1", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "♠10",
@@ -26,6 +27,7 @@ int player2Hp{ 0 };
 int player1Dia{ 0 };
 int player2Dia{ 0 };
 int playerNumber{ 0 };
+int turn{ 0 };
 
 void gamePlay() {
 	srand((unsigned int)time(0));
@@ -34,6 +36,7 @@ void gamePlay() {
 	while (true) {
 		cardChange();
 		playerChange();
+		turn++;
 	}
 }
 
@@ -45,8 +48,10 @@ void gameSet() {
 	player2Hp = 110;
 	player2Dia = 15;
 	playerNumber = 1;
+	turn = 1;
 
 	playerInformationShow();
+	turnShow();
 	cardShow();
 }
 
@@ -91,6 +96,7 @@ void cardChange() {
 
 		system("cls");
 		playerInformationShow();
+		turnShow();
 		cardShow();
 		cout << card[cardShowNumber[changeNumber - 1]] << "로 바뀌었습니다.\n";
 	}
@@ -111,4 +117,9 @@ void playerChange() {
 	else {
 		playerNumber = 1;
 	}
+}
+
+void turnShow() {
+	cout << turn << "번째 턴 입니다.\n"
+		<< "player" << playerNumber << "의 턴\n";
 }
