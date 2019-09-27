@@ -13,6 +13,7 @@ void playerInformationShow();
 void gameSet();
 void playerChange();
 void turnShow();
+void cardUseCheck();
 
 string card[40]
 { "♠1", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "♠10",
@@ -28,6 +29,7 @@ int player1Dia{ 0 };
 int player2Dia{ 0 };
 int playerNumber{ 0 };
 int turn{ 0 };
+int cardUseAmount{ 0 };
 
 void gamePlay() {
 	srand((unsigned int)time(0));
@@ -35,6 +37,7 @@ void gamePlay() {
 	gameSet();
 	while (true) {
 		cardChange();
+		cardUseCheck();
 		playerChange();
 		turn++;
 	}
@@ -122,4 +125,31 @@ void playerChange() {
 void turnShow() {
 	cout << turn << "번째 턴 입니다.\n"
 		<< "player" << playerNumber << "의 턴\n";
+}
+
+void cardUseCheck() {
+	int backNumber[10]{ 0 };
+	for (int checkCounter = 0; checkCounter < 7; checkCounter++) {
+		backNumber[cardNumber[checkCounter] % 10]++;
+	}
+
+	cardUseAmount = 1;
+	for (int cardUseCheck = 0; cardUseCheck < 10; cardUseCheck++) {
+		switch (backNumber[cardUseCheck])
+		{
+		case 2:
+			cardUseAmount += 1;
+			break;
+		case 3:
+			cardUseAmount += 2;
+			break;
+		case 4:
+			cardUseAmount += 4;
+			break;
+		default:
+			break;
+		}
+	}
+
+	cout << "당신은 " << cardUseAmount << "장의 카드를 사용할 수 있습니다.\n";
 }
