@@ -8,7 +8,7 @@ using namespace std;
 void cardShuffle();
 void cardSetting();
 void cardShow();
-void cardChange();
+void cardChange(int*);
 void playerInformationShow();
 void gameSet();
 void playerChange();
@@ -37,11 +37,11 @@ void gamePlay() {
 	gameSet();
 	while (true) {
 		if (playerNumber == 1) {
-			cardChange();
+			cardChange(&player1Dia);
 			cardUseCheck();
 		}
 		else {
-			cardChange();
+			cardChange(&player2Dia);
 			cardUseCheck();
 		}
 		playerChange();
@@ -90,10 +90,17 @@ void cardShow() {
 	cout << "\n\n----------------------------------------\n";
 }
 
-void cardChange() {
+void cardChange(int *dia) {
 	int changeAmount;
 	cout << "몇번 바꾸시겠습니까? ";
 	cin >> changeAmount;
+
+	while (changeAmount > *dia / 3) {
+		cout << *dia / 3 << " 이하의 값을 입력해주세요. ";
+		cin >> changeAmount;
+	}
+
+	*dia -= 3 * changeAmount;
 
 	for (int cardChangeCounter = 1; cardChangeCounter <= changeAmount; cardChangeCounter++) {
 		int changeNumber;
