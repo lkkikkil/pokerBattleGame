@@ -36,8 +36,14 @@ void gamePlay() {
 
 	gameSet();
 	while (true) {
-		cardChange();
-		cardUseCheck();
+		if (playerNumber == 1) {
+			cardChange();
+			cardUseCheck();
+		}
+		else {
+			cardChange();
+			cardUseCheck();
+		}
 		playerChange();
 		turn++;
 	}
