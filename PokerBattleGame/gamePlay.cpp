@@ -14,6 +14,7 @@ void gameSet();
 void playerChange();
 void turnShow();
 void cardUseCheck();
+void cardUse(int*, int*, int*);
 
 string card[40]
 { "♠1", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "♠10",
@@ -23,6 +24,8 @@ string card[40]
 
 vector <int> cardNumber;
 vector <int> cardShowNumber;
+vector<int> useCheck;
+
 int player1Hp{ 0 };
 int player2Hp{ 0 };
 int player1Dia{ 0 };
@@ -39,10 +42,12 @@ void gamePlay() {
 		if (playerNumber == 1) {
 			cardChange(&player1Dia);
 			cardUseCheck();
+			cardUse(&player1Hp, &player1Dia, &player2Hp);
 		}
 		else {
 			cardChange(&player2Dia);
 			cardUseCheck();
+			cardUse(&player2Hp, &player2Dia, &player1Hp);
 		}
 		playerChange();
 		turn++;
@@ -165,4 +170,51 @@ void cardUseCheck() {
 	}
 
 	cout << "당신은 " << cardUseAmount << "장의 카드를 사용할 수 있습니다.\n";
+}
+
+void cardUse(int* attackerHp, int* attackerDia, int* victimHp) {
+	int useInformation[3]{ 0 };
+
+	useCheck.clear();
+
+	for (int useCounter = 1; useCounter <= cardUseAmount; useCounter++) {
+		int useNumber;
+		cout << useCounter << "번째로 사용하실 카드의 번호를 입력해주세요 : ";
+		cin >> useNumber;
+
+		while (count(useCheck.begin(), useCheck.end(), useNumber)) {
+			cout << useNumber << "번 카드는 이미 사용했습니다. 다른 카드를 입력해 주세요 : ";
+			cin >> useNumber;
+		}
+
+		useCheck.push_back(useNumber);
+
+		int randomEffect = rand() % 3;
+
+		switch (cardNumber[useNumber - 1] / 10)
+		{
+		case 0:
+			useInformation[0] += (cardNumber[useNumber - 1] % 10) + 1; // damage
+			break;
+		case 1:
+			useInformation[1] += (cardNumber[useNumber - 1] % 10) + 1; // dia
+			break;
+		case 2:
+			useInformation[2] += (cardNumber[useNumber - 1] % 10) + 1; //heal
+			break;
+		case 3:
+			useInformation[randomEffect] += (cardNumber[useNumber - 1] % 10) + 1; // random effect
+			break;
+		default:
+			break;
+		}
+	}
+
+	cout << "데미지 : " << useInformation[0] << "\n"
+		<< "추가 다이아 : " << useInformation[1] << "\n"
+		<< "체력 회복 : " << useInformation[2] << "\n";
+
+	*victimHp -= useInformation[0];
+	*attackerDia += useInformation[1];
+	*attackerHp += useInformation[2];
 }
