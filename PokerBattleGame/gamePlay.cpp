@@ -148,7 +148,7 @@ void turnShow() {
 void cardUseCheck() {
 	int backNumber[10]{ 0 };
 	for (int checkCounter = 0; checkCounter < 7; checkCounter++) {
-		backNumber[cardNumber[checkCounter] % 10]++;
+		backNumber[cardShowNumber[checkCounter] % 10]++;
 	}
 
 	cardUseAmount = 1;
