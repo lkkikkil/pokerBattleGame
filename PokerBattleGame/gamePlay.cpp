@@ -15,6 +15,7 @@ void playerChange();
 void turnShow();
 void cardUseCheck();
 void cardUse(int*, int*, int*);
+void randomEffectShow(int, int);
 
 string card[40]
 { "♠1", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "♠10",
@@ -204,6 +205,7 @@ void cardUse(int* attackerHp, int* attackerDia, int* victimHp) {
 			break;
 		case 3:
 			useInformation[randomEffect] += (cardNumber[useNumber - 1] % 10) + 1; // random effect
+			randomEffectShow(randomEffect, (cardNumber[useNumber - 1] % 10) + 1);
 			break;
 		default:
 			break;
@@ -217,4 +219,22 @@ void cardUse(int* attackerHp, int* attackerDia, int* victimHp) {
 	*victimHp -= useInformation[0];
 	*attackerDia += useInformation[1];
 	*attackerHp += useInformation[2];
+}
+
+void randomEffectShow(int randomEffectNumber, int _cardNumber) {
+	switch (randomEffectNumber)
+	{
+	case 0:
+		cout << "♠";
+		break;
+	case 1:
+		cout << "◆";
+		break;
+	case 2:
+		cout << "♥";
+		break;
+	default:
+		break;
+	}
+	cout << _cardNumber << "로 바뀌었습니다.\n";
 }
