@@ -192,20 +192,20 @@ void cardUse(int* attackerHp, int* attackerDia, int* victimHp) {
 
 		int randomEffect = rand() % 3;
 
-		switch (cardNumber[useNumber - 1] / 10)
+		switch (cardShowNumber[useNumber - 1] / 10)
 		{
 		case 0:
-			useInformation[0] += (cardNumber[useNumber - 1] % 10) + 1; // damage
+			useInformation[0] += (cardShowNumber[useNumber - 1] % 10) + 1; // damage
 			break;
 		case 1:
-			useInformation[1] += (cardNumber[useNumber - 1] % 10) + 1; // dia
+			useInformation[1] += (cardShowNumber[useNumber - 1] % 10) + 1; // dia
 			break;
 		case 2:
-			useInformation[2] += (cardNumber[useNumber - 1] % 10) + 1; //heal
+			useInformation[2] += (cardShowNumber[useNumber - 1] % 10) + 1; //heal
 			break;
 		case 3:
-			useInformation[randomEffect] += (cardNumber[useNumber - 1] % 10) + 1; // random effect
-			randomEffectShow(randomEffect, (cardNumber[useNumber - 1] % 10) + 1);
+			useInformation[randomEffect] += (cardShowNumber[useNumber - 1] % 10) + 1; // random effect
+			randomEffectShow(randomEffect, (cardShowNumber[useNumber - 1] % 10) + 1);
 			break;
 		default:
 			break;
