@@ -16,6 +16,7 @@ void turnShow();
 void cardUseCheck();
 void cardUse(int*, int*, int*);
 void randomEffectShow(int, int);
+void playerHpCheck();
 
 string card[40]
 { "♠1", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "♠10",
@@ -34,12 +35,21 @@ int player2Dia{ 0 };
 int playerNumber{ 0 };
 int turn{ 0 };
 int cardUseAmount{ 0 };
+int nextTurn{ 0 };
 
 void gamePlay() {
 	srand((unsigned int)time(0));
 
 	gameSet();
-	while (true) {
+	while (nextTurn) {
+		system("cls");
+
+		cardSetting();
+
+		playerInformationShow();
+		turnShow();
+		cardShow();
+
 		if (playerNumber == 1) {
 			cardChange(&player1Dia);
 			cardUseCheck();
@@ -50,24 +60,19 @@ void gamePlay() {
 			cardUseCheck();
 			cardUse(&player2Hp, &player2Dia, &player1Hp);
 		}
-		playerChange();
-		turn++;
+		playerHpCheck();
 	}
 }
 
 void gameSet() {
 	cardShuffle();
-	cardSetting();
 	player1Hp = 100;
 	player1Dia = 10;
 	player2Hp = 110;
 	player2Dia = 15;
 	playerNumber = 1;
 	turn = 1;
-
-	playerInformationShow();
-	turnShow();
-	cardShow();
+	nextTurn = 1;
 }
 
 void cardShuffle() {
@@ -237,4 +242,26 @@ void randomEffectShow(int randomEffectNumber, int _cardNumber) {
 		break;
 	}
 	cout << _cardNumber << "로 바뀌었습니다.\n";
+}
+
+void playerHpCheck() {
+	if (player1Hp == 0) {
+		playerInformationShow();
+		cout << "player1의 체력이 0이 되었습니다.\n"
+			<< "player2가 승리하였습니다.\n";
+		nextTurn = 0;
+	}
+	else if (player2Hp == 0) {
+		playerInformationShow();
+		cout << "player2의 체력이 0이 되었습니다.\n"
+			<< "player1가 승리하였습니다.\n";
+		nextTurn = 0;
+	}
+	else {
+		cout << "턴을 넘기시겠습니까? ";
+		cin >> nextTurn;
+
+		turn++;
+		playerChange();
+	}
 }
