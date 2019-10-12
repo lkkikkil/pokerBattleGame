@@ -86,6 +86,10 @@ void cardShuffle() {
 }
 
 void cardSetting() {
+	if (cardNumber.empty()) {
+		cardShuffle();
+	}
+
 	cardShowNumber.clear();
 	for (int cardSetCounter = 0; cardSetCounter < 7; cardSetCounter++) {
 		cardShowNumber.push_back(cardNumber[0]);
@@ -102,6 +106,10 @@ void cardShow() {
 }
 
 void cardChange(int *dia) {
+	if (cardNumber.empty()) {
+		cardShuffle();
+	}
+
 	int changeAmount;
 	cout << "몇번 바꾸시겠습니까? ";
 	cin >> changeAmount;
