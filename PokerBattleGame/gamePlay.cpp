@@ -86,12 +86,12 @@ void cardShuffle() {
 }
 
 void cardSetting() {
-	if (cardNumber.empty()) {
-		cardShuffle();
-	}
-
 	cardShowNumber.clear();
 	for (int cardSetCounter = 0; cardSetCounter < 7; cardSetCounter++) {
+		if (cardNumber.empty()) {
+			cardShuffle();
+		}
+
 		cardShowNumber.push_back(cardNumber[0]);
 		cardNumber.erase(cardNumber.begin());
 	}
@@ -106,10 +106,6 @@ void cardShow() {
 }
 
 void cardChange(int *dia) {
-	if (cardNumber.empty()) {
-		cardShuffle();
-	}
-
 	int changeAmount;
 	cout << "몇번 바꾸시겠습니까? ";
 	cin >> changeAmount;
@@ -122,6 +118,10 @@ void cardChange(int *dia) {
 	*dia -= 3 * changeAmount;
 
 	for (int cardChangeCounter = 1; cardChangeCounter <= changeAmount; cardChangeCounter++) {
+		if (cardNumber.empty()) {
+			cardShuffle();
+		}
+
 		int changeNumber;
 		cout << cardChangeCounter << "번째로 바꾸실 카드의 번호를 입력해주세요 : ";
 		cin >> changeNumber;
