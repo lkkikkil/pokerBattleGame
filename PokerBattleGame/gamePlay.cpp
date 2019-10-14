@@ -24,7 +24,8 @@ string card[40]
 	"♥1", "♥2", "♥3", "♥4", "♥5", "♥6", "♥7", "♥8", "♥9", "♥10",
 	"♣1", "♣2", "♣3", "♣4", "♣5", "♣6", "♣7", "♣8", "♣9", "♣10" };
 
-vector <int> cardNumber;
+vector <int> player1Deck;
+vector <int> player2Deck;
 vector <int> cardShowNumber;
 vector<int> useCheck;
 
@@ -77,23 +78,47 @@ void gameSet() {
 
 void cardShuffle() {
 	int number = rand() % 40;
-	for (int cardCounter = 0; cardCounter < 40; cardCounter++) {
-		while (count(cardNumber.begin(), cardNumber.end(), number)) {
-			number = rand() % 40;
+	if (playerNumber == 1) {
+		for (int cardCounter = 0; cardCounter < 40; cardCounter++) {
+			while (count(player1Deck.begin(), player1Deck.end(), number)) {
+				number = rand() % 40;
+			}
+			player1Deck.push_back(number);
 		}
-		cardNumber.push_back(number);
 	}
+	else {
+		for (int cardCounter = 0; cardCounter < 40; cardCounter++) {
+			while (count(player2Deck.begin(), player2Deck.end(), number)) {
+				number = rand() % 40;
+			}
+			player2Deck.push_back(number);
+		}
+	}
+	
 }
 
 void cardSetting() {
 	cardShowNumber.clear();
-	for (int cardSetCounter = 0; cardSetCounter < 7; cardSetCounter++) {
-		if (cardNumber.empty()) {
-			cardShuffle();
-		}
 
-		cardShowNumber.push_back(cardNumber[0]);
-		cardNumber.erase(cardNumber.begin());
+	if (playerNumber == 1) {
+		for (int cardSetCounter = 0; cardSetCounter < 7; cardSetCounter++) {
+			if (player1Deck.empty()) {
+				cardShuffle();
+			}
+
+			cardShowNumber.push_back(player1Deck[0]);
+			player1Deck.erase(player1Deck.begin());
+		}
+	}
+	else {
+		for (int cardSetCounter = 0; cardSetCounter < 7; cardSetCounter++) {
+			if (player2Deck.empty()) {
+				cardShuffle();
+			}
+
+			cardShowNumber.push_back(player2Deck[0]);
+			player2Deck.erase(player2Deck.begin());
+		}
 	}
 }
 
@@ -117,23 +142,45 @@ void cardChange(int *dia) {
 
 	*dia -= 3 * changeAmount;
 
-	for (int cardChangeCounter = 1; cardChangeCounter <= changeAmount; cardChangeCounter++) {
-		if (cardNumber.empty()) {
-			cardShuffle();
+	if (playerNumber == 1) {
+		for (int cardChangeCounter = 1; cardChangeCounter <= changeAmount; cardChangeCounter++) {
+			if (player1Deck.empty()) {
+				cardShuffle();
+			}
+
+			int changeNumber;
+			cout << cardChangeCounter << "번째로 바꾸실 카드의 번호를 입력해주세요 : ";
+			cin >> changeNumber;
+
+			cardShowNumber[changeNumber - 1] = player1Deck[0];
+			player1Deck.erase(player1Deck.begin());
+
+			system("cls");
+			playerInformationShow();
+			turnShow();
+			cardShow();
+			cout << card[cardShowNumber[changeNumber - 1]] << "로 바뀌었습니다.\n";
 		}
+	}
+	else {
+		for (int cardChangeCounter = 1; cardChangeCounter <= changeAmount; cardChangeCounter++) {
+			if (player2Deck.empty()) {
+				cardShuffle();
+			}
 
-		int changeNumber;
-		cout << cardChangeCounter << "번째로 바꾸실 카드의 번호를 입력해주세요 : ";
-		cin >> changeNumber;
+			int changeNumber;
+			cout << cardChangeCounter << "번째로 바꾸실 카드의 번호를 입력해주세요 : ";
+			cin >> changeNumber;
 
-		cardShowNumber[changeNumber - 1] = cardNumber[0];
-		cardNumber.erase(cardNumber.begin());
+			cardShowNumber[changeNumber - 1] = player2Deck[0];
+			player2Deck.erase(player2Deck.begin());
 
-		system("cls");
-		playerInformationShow();
-		turnShow();
-		cardShow();
-		cout << card[cardShowNumber[changeNumber - 1]] << "로 바뀌었습니다.\n";
+			system("cls");
+			playerInformationShow();
+			turnShow();
+			cardShow();
+			cout << card[cardShowNumber[changeNumber - 1]] << "로 바뀌었습니다.\n";
+		}
 	}
 }
 
