@@ -17,6 +17,7 @@ void cardUseCheck();
 void cardUse(int*, int*, int*);
 void randomEffectShow(int, int);
 void playerHpCheck();
+void gameStatusShow();
 
 string card[40]
 { "♠1", "♠2", "♠3", "♠4", "♠5", "♠6", "♠7", "♠8", "♠9", "♠10",
@@ -43,13 +44,9 @@ void gamePlay() {
 
 	gameSet();
 	while (nextTurn) {
-		system("cls");
-
 		cardSetting();
 
-		playerInformationShow();
-		turnShow();
-		cardShow();
+		gameStatusShow();
 
 		if (playerNumber == 1) {
 			cardChange(&player1Dia);
@@ -155,10 +152,7 @@ void cardChange(int *dia) {
 			cardShowNumber[changeNumber - 1] = player1Deck[0];
 			player1Deck.erase(player1Deck.begin());
 
-			system("cls");
-			playerInformationShow();
-			turnShow();
-			cardShow();
+			gameStatusShow();
 			cout << card[cardShowNumber[changeNumber - 1]] << "로 바뀌었습니다.\n";
 		}
 	}
@@ -175,10 +169,7 @@ void cardChange(int *dia) {
 			cardShowNumber[changeNumber - 1] = player2Deck[0];
 			player2Deck.erase(player2Deck.begin());
 
-			system("cls");
-			playerInformationShow();
-			turnShow();
-			cardShow();
+			gameStatusShow();
 			cout << card[cardShowNumber[changeNumber - 1]] << "로 바뀌었습니다.\n";
 		}
 	}
@@ -319,4 +310,11 @@ void playerHpCheck() {
 		turn++;
 		playerChange();
 	}
+}
+
+void gameStatusShow() {
+	system("cls");
+	playerInformationShow();
+	turnShow();
+	cardShow();
 }
