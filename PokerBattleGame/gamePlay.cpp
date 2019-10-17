@@ -149,6 +149,11 @@ void cardChange(int *dia) {
 			cout << cardChangeCounter << "번째로 바꾸실 카드의 번호를 입력해주세요 : ";
 			cin >> changeNumber;
 
+			while (changeNumber < 1 || changeNumber > 7) {
+				cout << "1부터 7까지 숫자를 입력해주세요.";
+				cin >> changeNumber;
+			}
+
 			cardShowNumber[changeNumber - 1] = player1Deck[0];
 			player1Deck.erase(player1Deck.begin());
 
@@ -165,6 +170,11 @@ void cardChange(int *dia) {
 			int changeNumber;
 			cout << cardChangeCounter << "번째로 바꾸실 카드의 번호를 입력해주세요 : ";
 			cin >> changeNumber;
+
+			while (changeNumber < 1 || changeNumber > 7) {
+				cout << "1부터 7까지 숫자를 입력해주세요.";
+				cin >> changeNumber;
+			}
 
 			cardShowNumber[changeNumber - 1] = player2Deck[0];
 			player2Deck.erase(player2Deck.begin());
@@ -233,6 +243,11 @@ void cardUse(int* attackerHp, int* attackerDia, int* victimHp) {
 		int useNumber;
 		cout << useCounter << "번째로 사용하실 카드의 번호를 입력해주세요 : ";
 		cin >> useNumber;
+
+		while (useNumber < 1 || useNumber > 7) {
+			cout << "1부터 7까지 숫자를 입력해주세요.";
+			cin >> useNumber;
+		}
 
 		while (count(useCheck.begin(), useCheck.end(), useNumber)) {
 			cout << useNumber << "번 카드는 이미 사용했습니다. 다른 카드를 입력해 주세요 : ";
